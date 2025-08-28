@@ -4,6 +4,10 @@
     <p>This is a simple application to manage your tasks.</p>
 
     <h3>Your Tasks:</h3>
+    <form>
+        {{ form }}
+        <input type="submit" value="Add Task">
+    </form>
     <ul>
         {% for task in tasks %}
             <li>{{ task.title }} - {% if task.complete %}Completed{% else %}Pending{% endif %}</li>
