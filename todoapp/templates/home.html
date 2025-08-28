@@ -2,17 +2,20 @@
 {% block content %}
     <h2>Welcome to the To-Do App</h2>
     <p>This is a simple application to manage your tasks.</p>
-
-    <h3>Your Tasks:</h3>
-    <form>
-        {{ form }}
+    <form method = "POST" action = "/">
+        {% csrf_token %}
+        {{ form.title }}
         <input type="submit" value="Add Task">
     </form>
+    <h3>Your Tasks:</h3>
+    
     <ul>
         {% for task in tasks %}
             <li>{{ task.title }} - {% if task.complete %}Completed{% else %}Pending{% endif %}</li>
+            <a href="{% url 'updateTask' task.id %}">Update</a>
         {% empty %}
             <li>No tasks available.</li>
         {% endfor %}
     </ul>
+
 {% endblock content %}
