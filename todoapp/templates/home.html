@@ -10,12 +10,14 @@
     <h3>Your Tasks:</h3>
     
     <ul>
-        {% for task in tasks %}
-            <li>{{ task.title }} - {% if task.complete %}Completed{% else %}Pending{% endif %}</li>
-            <a href="{% url 'updateTask' task.id %}">Update</a>
-        {% empty %}
-            <li>No tasks available.</li>
-        {% endfor %}
+    {% for task in tasks %}
+        <li class="{% if task.complete %}complete{% endif %}">
+            {{ task.title }} - {% if task.complete %}Completed{% else %}Pending{% endif %}
+            <a href="{% url 'updateTask' task.id %}" class="update-link">Update</a>
+        </li>
+    {% empty %}
+        <li>No tasks available.</li>
+    {% endfor %}
     </ul>
 
 {% endblock content %}

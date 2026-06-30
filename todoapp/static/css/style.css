@@ -1,0 +1,346 @@
+:root {
+  --paper: #faf6ee;
+  --paper-line: #e3d9c4;
+  --ink: #2b2620;
+  --ink-soft: #6b6155;
+  --accent: #c1502e;      
+  --accent-dark: #9c3e22;
+  --done: #7a8c6b;       
+  --done-bg: #eef1e8;
+  --pending-bg: #fff;
+  --shadow: rgba(43, 38, 32, 0.08);
+
+  --font-display: "Courier New", "Courier Prime", monospace;
+  --font-body: Georgia, "Iowan Old Style", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--paper);
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 38px,
+      var(--paper-line) 39px
+    );
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+
+
+nav {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 6px var(--shadow);
+}
+
+nav a {
+  color: var(--paper);
+  text-decoration: none;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  transition: opacity 0.15s ease;
+}
+
+nav a:hover,
+nav a:focus-visible {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+nav .brand {
+  font-weight: bold;
+  font-size: 1.1rem;
+  opacity: 1;
+}
+
+nav .brand::before {
+  content: "☑ ";
+  color: var(--accent);
+}
+
+
+main, body > h2, body > p, body > form, body > ul {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h2 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1.4rem;
+  margin: 40px auto 4px;
+  padding: 0 24px;
+  display: block;
+  max-width: 640px;
+}
+
+h2::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  background: var(--accent);
+  margin-top: 10px;
+}
+
+body > p {
+  color: var(--ink-soft);
+  padding: 0 24px;
+  margin: 8px auto 28px;
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  max-width: 640px;
+  margin: 36px auto 12px;
+  padding: 0 24px;
+}
+
+
+form {
+  display: flex;
+  gap: 10px;
+  padding: 18px 24px;
+  margin: 0 auto 8px;
+  background: var(--pending-bg);
+  border: 1px solid var(--paper-line);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px var(--shadow);
+  flex-wrap: wrap;
+}
+
+form input[type="text"],
+form input[name],
+form input:not([type="submit"]),
+form textarea,
+form select {
+  flex: 1;
+  min-width: 180px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 10px 12px;
+  border: 1px solid var(--paper-line);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+form input:focus-visible,
+form textarea:focus-visible,
+form select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+form input[type="submit"] {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+  background: var(--accent);
+  color: var(--paper);
+  border: none;
+  border-radius: 4px;
+  padding: 10px 22px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+form input[type="submit"]:hover {
+  background: var(--accent-dark);
+}
+
+form input[type="submit"]:active {
+  transform: translateY(1px);
+}
+
+
+ul {
+  list-style: none;
+  padding: 0 24px;
+  margin: 0 auto 48px;
+}
+
+ul li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--pending-bg);
+  border: 1px solid var(--paper-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 4px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  font-size: 1.02rem;
+  box-shadow: 0 1px 3px var(--shadow);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+ul li:hover {
+  transform: translateX(2px);
+  box-shadow: 0 3px 6px var(--shadow);
+}
+
+ul li:has(> :last-child) {
+  
+}
+
+ul li.complete,
+ul li:has(.task-status--complete) {
+  border-left-color: var(--done);
+  background: var(--done-bg);
+  color: var(--ink-soft);
+  text-decoration: line-through;
+  text-decoration-color: var(--done);
+}
+
+li::before {
+  content: "—";
+  color: var(--ink-soft);
+  display: none;
+}
+
+ul li a,
+ul li .update-link {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+ul li a:hover,
+ul li .update-link:hover {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+ul li:empty,
+ul li:only-child:not(:has(a)) {
+  border-left-color: var(--paper-line);
+  color: var(--ink-soft);
+  font-style: italic;
+  justify-content: center;
+}
+
+
+.status {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+
+.status--pending {
+  background: #fbe9df;
+  color: var(--accent-dark);
+}
+
+.status--complete {
+  background: var(--done-bg);
+  color: var(--done);
+}
+
+
+main form {
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 480px;
+  margin: 30px auto;
+}
+
+main form input[type="submit"] {
+  align-self: flex-start;
+}
+
+main form label {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  margin-top: 6px;
+}
+
+main form input[type="checkbox"] {
+  width: auto;
+  align-self: flex-start;
+  accent-color: var(--accent);
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 18px;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+
+@media (max-width: 600px) {
+  nav {
+    padding: 14px 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  h2, body > p, h3, form, ul {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  form {
+    flex-direction: column;
+  }
+
+  ul li {
+    flex-wrap: wrap;
+  }
+}
